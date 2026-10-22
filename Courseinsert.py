@@ -1,0 +1,37 @@
+import tkinter 
+from tkinter import*
+from tkinter import messagebox
+import pymysql
+t=tkinter.Tk()
+t.geometry('700x600')
+def insertdata():
+    db=pymysql.connect(host="localhost",user="root",password="root",database="my56")
+    cur=db.cursor()
+    xa=int(ea.get())
+    xb=eb.get()
+    xc=int(ec.get())
+    xd=int(ed.get())
+    sql="insert into courses values (%s,%s,%s,%s)"
+    cur.execute(sql,(xa,xb,xc,xd))
+    db.commit()
+    messagebox.showinfo('data inserted')
+    db.close()
+a=Label(t,text='courseid')
+a.place(x=50,y=50)
+ea=Entry(t,width=20)
+ea.place(x=400,y=50)
+b=Label(t,text='coursename')
+b.place(x=50,y=90)
+eb=Entry(t,width=20)
+eb.place(x=400,y=90)
+c=Label(t,text='durationindays')
+c.place(x=50,y=130)
+ec=Entry(t,width=20)
+ec.place(x=400,y=130)
+d=Label(t,text='fees')
+d.place(x=50,y=170)
+ed=Entry(t,width=20)
+ed.place(x=400,y=170)
+bt=Button(t,text='insert',command=insertdata)
+bt.place(x=50,y=400)
+t.mainloop()
